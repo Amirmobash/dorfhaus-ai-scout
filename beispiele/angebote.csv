@@ -1,3 +1,4 @@
-titel,preis,wohnflaeche,ort,url,beschreibung,quelle
-"Fiktives Musterhaus A",115000,100,"Beispielort NRW",https://example.com/muster-a,"Modernisiert und gepflegt. Angaben sind frei erfunden.",Demo
-"Fiktives Musterhaus B",89000,85,"Beispielort NRW",https://example.com/muster-b,"Sanierungsbedürftig und Feuchtigkeit. Angaben sind frei erfunden.",Demo
+titel,preis,wohnflaeche,ort,url,beschreibung,quelle,immobilienart,hausgeld
+"Fiktives Musterhaus Ramrath",115000,74,"Ramrath, Rommerskirchen",https://example.com/fiktiv-haus,"Gepflegtes Musterhaus. Alle Daten frei erfunden.",Demo,Haus,
+"Fiktive Musterwohnung Frixheim",99500,51,"Frixheim, Rommerskirchen",https://example.com/fiktiv-wohnung,"Muster-Eigentumswohnung, angeblich bezugsfertig. Alle Daten frei erfunden.",Demo,Wohnung,240
+"Fiktives Sanierungsobjekt Frixheim",89000,85,"Frixheim, Rommerskirchen",https://example.com/fiktiv-sanierung,"Sanierungsbedürftig und Feuchtigkeit. Alle Daten frei erfunden.",Demo,Haus,
