@@ -1,59 +1,78 @@
-# DorfHaus AI Scout 🏡
+# DorfHaus & Wohnungs-Scout 🏡
 
-**Immobilien intelligent vergleichen – Region zwischen Köln und Düsseldorf.**
+**Häuser und Eigentumswohnungen zwischen Köln und Düsseldorf strukturiert finden und bewerten.**
 
-Ein quelloffenes, lokal ausführbares Werkzeug zur strukturierten Bewertung von Wohnhäusern in Nordrhein-Westfalen.
+Kostenloses, quelloffenes, lokal ausführbares Werkzeug für die Prüfung öffentlich indexierter Immobilienangebote und eigener CSV-Dateien.
 
-**Projekt von Amirmobash.**
+**Projekt von Amirmobash.** Keine privaten Kontakt-, Arbeitgeber-, Hochschul- oder Kontodaten im Repository.
 
 ## Funktionen
-- Kaufnebenkosten in NRW und monatliche Finanzierungsrate berechnen
-- Immobilienangebote aus CSV importieren und dauerhaft in SQLite speichern
-- Hinweise auf Sanierungsrisiken erkennen und begründet bewerten
-- Angebote nach Preis, Wohnfläche und Zustand filtern
-- Originalanzeigen direkt öffnen
-- Daten lokal halten – keine persönlichen Angaben im Repository
 
-**Wichtig:** Die Schaltfläche „Immobilien jetzt suchen“ liest öffentlich zugängliche Bing-RSS-Suchergebnisse zu Immobilienportalen. Sie durchsucht **nicht** die Immobilienportale selbst. Die Ergebnisse sind unvollständig, möglicherweise veraltet und keine verifizierten Kaufangebote. Es werden keine Zugangsbeschränkungen umgangen.
+- **Haus / Wohnung / Beides** wählen; separate Suchbegriffe für Häuser und Eigentumswohnungen.
+- Kaufpreisobergrenze standardmäßig **120.000 €** (frei änderbar).
+- Suchprofil mit Ramrath, Frixheim, Anstel, Nettesheim, Butzheim, Oekoven, Deelen, Evinghoven und weiteren Orten im Korridor Köln–Düsseldorf.
+- Optional nur Suchtreffer mit expliziter Ortsnennung zeigen; Fachwerk- und deutliche Sanierungshinweise ausfiltern.
+- Öffentlich zugängliche Bing-RSS-Suchergebnisse für **Sparkassen-Immobilien**, **VON POLL**, ImmobilienScout24, immowelt, Kleinanzeigen, meinestadt.de und VR-Immobilien abfragen. Original-Links öffnen.
+- Ergebnisse nach Suchlauf weiter anzeigen, als CSV exportieren oder lokal in SQLite merken.
+- Eigene CSV-Angebote als Haus oder Wohnung importieren, Wohnfläche/Preis filtern und Kaufnebenkosten bzw. monatliche Kreditrate modellhaft berechnen.
+- Bei Wohnungen Hinweise auf **Hausgeld, Sonderumlage, Instandhaltungsrücklage, Vermietung und Erbpacht** markieren; optional Hausgeld im CSV erfassen.
+- Datenbank bestehender Nutzer wird beim ersten Speichern automatisch um die Wohnungsfelder erweitert.
 
-## Schnellstart
-Python 3.11 oder neuer installieren.
+## Wichtige Grenzen
+
+**Keine garantierte Live- oder Vollsuche:** Die Software fragt nur den öffentlich verfügbaren Suchindex per Bing-RSS ab. Sie greift nicht direkt auf Immobilienportal-Webseiten zu, umgeht keine Zugangssperren und verwendet keinen kostenpflichtigen API-Schlüssel. RSS-Ergebnisse können veraltet, unvollständig oder leer sein. Die Anbieter können ihre Suchindex-Ausgabe jederzeit ändern.
+
+**Ein Inserat ist keine Bauprüfung.** Preisangaben stammen nur aus Überschriften oder Suchtext. Fehlt eine Preisangabe, wird sie ausdrücklich als **unbekannt** markiert und nicht als bestätigter Budgettreffer gezählt. Fehlende Fachwerk- oder Sanierungsbegriffe beweisen weder Massivbau noch Bezugsfertigkeit. Orte werden nur aus dem Indextext erkannt; die tatsächliche ländliche Lage und **Autofahrtzeiten von maximal 40 Minuten** werden nicht automatisch überprüft. Bei Wohnungen sollten Teilungserklärung, Hausgeld, WEG-Protokolle, Rücklagen und mögliche Sonderumlagen vor dem Kauf geprüft werden.
+
+## Start unter Windows
+
+1. Das Repository über **Code → Download ZIP** herunterladen und entpacken.
+2. `start.bat` doppelklicken.
+3. Der Starter erstellt lokal eine Python-Umgebung und installiert die in `requirements.txt` genannten freien Pakete. Wenn Python fehlt, wird eine Installation über `winget` **nur nach Bestätigung** angeboten. Danach den Starter erneut ausführen.
+4. In der Weboberfläche **Immobilienart**, **Kaufpreis**, **Dörfer** und **Ausschlussfilter** auswählen und **„Immobilien jetzt suchen“** anklicken.
+5. Die Treffer mit dem Originalinserat abgleichen; alternativ eigene CSV importieren.
+
+Falls Windows die Installation blockiert: Python 3.11+ von python.org installieren und `start.bat` erneut ausführen. Keine GitHub-Actions-Läufe oder GitHub-Bezahldienste erforderlich. Die Installation benötigt Internetzugang, verursacht aber keine beabsichtigten Lizenz- oder GitHub-Servicegebühren.
+
+## Alternativer Start
 
 ```bash
 python -m venv .venv
 # Windows: .venv\Scripts\activate
 # Linux/macOS: source .venv/bin/activate
 pip install -r requirements.txt
-streamlit run app.py
+python -m streamlit run app.py
 ```
-
-Unter Windows alternativ `start.bat` doppelklicken. Der Starter erstellt eine virtuelle Umgebung und installiert die kostenlosen Python-Pakete automatisch. Falls Python fehlt, fragt er vor einer kostenlosen Installation über winget um Erlaubnis. Es wird kein Cloud-Dienst benötigt.
 
 ## CSV-Import
-Spalten: `titel,preis,wohnflaeche,ort,url,beschreibung,quelle`. Eine Beispieldatei liegt unter `beispiele/angebote.csv`. Alle Beispiele sind fiktiv.
 
-## Qualität
+Pflichtspalten: `titel,preis,wohnflaeche,ort,url,beschreibung,quelle`.
+
+Optionale Spalten: `immobilienart` (`Haus` oder `Wohnung`), `hausgeld` (monatlich in Euro). Ohne `immobilienart` erfolgt eine vorsichtige Texterkennung aus dem Titel/der Beschreibung. Die Datei `beispiele/angebote.csv` enthält **ausschließlich fiktive Testobjekte**, keine echten Kaufangebote.
+
+## Lokale Tests (ohne GitHub Actions)
+
 ```bash
-pip install pytest
-pytest -q
+python -m pip install -r requirements.txt
+python -m pytest -q
 ```
 
-## Hinweise
-Steuersätze und Zinssätze sind veränderbare Modellannahmen, keine verbindlichen Angebote. Immobilien müssen vor einem Kauf unabhängig geprüft werden.
+Steuern und Zinsen sind änderbare Modellannahmen, keine Angebote. Die Grunderwerbsteuer in NRW wird als 6,5 % angesetzt. Laufendes Hausgeld ist **nicht** in der Darlehensrate enthalten.
 
-## Datenschutz
-Keine Namen von Arbeitgebern, Hochschulen, Bankverbindungen, privaten Adressen oder Zugangsdaten in öffentliche Dateien aufnehmen. Lokale Datenbanken sind von Git ausgeschlossen.
+## Datenschutz & Kosten
+
+Die Weboberfläche wird lokal gestartet, die Datenbank lokal gespeichert. Nur die Suchanfragen gehen an den öffentlichen Suchindex, sobald der Nutzer die Suche startet. Keine persönlichen Daten in den öffentlichen Quellcode oder Beispieldateien schreiben. Kein automatischer GitHub-Workflow und kein kostenpflichtiger Suchanbieter erforderlich.
 
 ## Roadmap
-1. Erlaubte Schnittstellen und Angebotsimporte für Sparkassen-Immobilien priorisieren.
-2. Weitere Portale über dokumentierte, zulässige Adapter anbinden.
-3. Preisverläufe, Dubletten und Benachrichtigungen ergänzen.
-4. Optionales Hosting mit Zugriffsschutz.
+
+1. Erlaubte, dokumentierte Portalschnittstellen prüfen und ergänzen.
+2. Standort- und Fahrzeiten mit einer geeigneten freiwilligen Routinganbindung verifizieren.
+3. Historie, Dubletten und auf Wunsch lokale Benachrichtigungen ergänzen.
 
 ## Inspiration
+
 - [Fredy](https://github.com/orangecoding/fredy) – Quellenadapter und Benachrichtigungen
 - [wohnung-notifier-bot](https://github.com/alice17/wohnung-notifier-bot) – Mehrquellensuche
-- [ImmoScout Python Client](https://github.com/wiestju/immoscout) – strukturierte Immobilienmodelle
 
 Keine Fremdquelltexte übernommen.
 
