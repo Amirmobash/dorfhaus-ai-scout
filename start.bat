@@ -1,7 +1,7 @@
 @echo off
 cd /d "%~dp0"
-if not exist .venv (python -m venv .venv)
-call .venv\Scripts\activate.bat
-python -m pip install -r requirements.txt
-python -m streamlit run app.py
-pause
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0installieren-und-starten.ps1"
+if errorlevel 1 (
+  echo Installation oder Start fehlgeschlagen.
+  pause
+)
