@@ -14,7 +14,7 @@ Ein quelloffenes, lokal ausführbares Werkzeug zur strukturierten Bewertung von 
 - Originalanzeigen direkt öffnen
 - Daten lokal halten – keine persönlichen Angaben im Repository
 
-**Wichtig:** Eine Live-Suche über Immobilienportale ist noch nicht integriert. Das Projekt behauptet keine automatische Vollabdeckung. Es umgeht keine Zugangsbeschränkungen.
+**Wichtig:** Die Schaltfläche „Immobilien jetzt suchen“ liest öffentlich zugängliche Bing-RSS-Suchergebnisse zu Immobilienportalen. Sie durchsucht **nicht** die Immobilienportale selbst. Die Ergebnisse sind unvollständig, möglicherweise veraltet und keine verifizierten Kaufangebote. Es werden keine Zugangsbeschränkungen umgangen.
 
 ## Schnellstart
 Python 3.11 oder neuer installieren.
@@ -27,7 +27,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-Unter Windows alternativ `start.bat` doppelklicken.
+Unter Windows alternativ `start.bat` doppelklicken. Der Starter erstellt eine virtuelle Umgebung und installiert die kostenlosen Python-Pakete automatisch. Falls Python fehlt, fragt er vor einer kostenlosen Installation über winget um Erlaubnis. Es wird kein Cloud-Dienst benötigt.
 
 ## CSV-Import
 Spalten: `titel,preis,wohnflaeche,ort,url,beschreibung,quelle`. Eine Beispieldatei liegt unter `beispiele/angebote.csv`. Alle Beispiele sind fiktiv.
