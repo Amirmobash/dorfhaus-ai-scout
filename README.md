@@ -1,5 +1,11 @@
 # DorfHaus & Wohnungs-Scout 🏡
 
+
+<p align="center"><img src="docs/images/dorfhaus-property-listings-comparison-software.svg" alt="DorfHaus house and apartment property listing comparison tool" width="960" /></p>
+
+<sub>Illustrative project schematic; not an actual CAD export, hardware photograph, or independently tested result.</sub>
+
+
 **Häuser und Eigentumswohnungen zwischen Köln und Düsseldorf strukturiert finden und bewerten.**
 
 Kostenloses, quelloffenes, lokal ausführbares Werkzeug für die Prüfung öffentlich indexierter Immobilienangebote und eigener CSV-Dateien.
